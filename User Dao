@@ -1,0 +1,56 @@
+package com.example.dao;
+
+import com.example.model.User;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+import java.util.List;
+
+public class UserDaoTest {
+    private UserDao userDao;
+
+    @BeforeEach
+    public void setUp() {
+        userDao = new UserDao();
+    }
+
+    @Test
+    public void testAddUser () {
+        User user = new User();
+        user.setUsername("testUser ");
+        user.setEmail("test@example.com");
+
+        userDao.addUser (user);
+        assertEquals(1, userDao.getAllUsers().size());
+    }
+
+    @Test
+    public void testGetAllUsers() {
+        User user1 = new User();
+        user1.setUsername("user1");
+        user1.setEmail("user1@example.com");
+        userDao.addUser (user1);
+
+        User user2 = new User();
+        user2.setUsername("user2");
+        user2.setEmail("user2@example.com");
+        userDao.addUser (user2);
+
+        List<User> users = userDao.getAllUsers();
+        assertEquals(2, users.size());
+    }
+
+    @Test
+    public void testGetUser ByUsername() {
+        User user = new User();
+        user.setUsername("uniqueUser ");
+        user.setEmail("unique@example.com");
+        userDao.addUser (user);
+
+        User foundUser  = userDao.getUser ByUsername("uniqueUser ");
+        assertNotNull(foundUser );
+        assertEquals("uniqueUser ", foundUser .getUsername());
+    }
+}

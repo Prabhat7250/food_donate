@@ -1,0 +1,13 @@
+CREATE DATABASE food;
+
+USE food;
+
+CREATE TABLE user1 (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(50) NOT NULL,
+    password VARCHAR(20) NOT NULL,
+    email VARCHAR(50) NOT NULL UNIQUE,
+    country VARCHAR(50) NOT NULL
+);
+
+DESC user1;

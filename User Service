@@ -1,0 +1,46 @@
+package com.example.service;
+
+import com.example.dao.UserDao;
+import com.example.model.User;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import static org.mockito.Mockito.*;
+
+import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+public class UserServiceTest {
+    private UserDao userDao;
+    private UserService userService;
+
+    @BeforeEach
+    public void setUp() {
+        userDao = mock(UserDao.class);
+        userService = new UserService(userDao);
+    }
+
+    @Test
+    public void testRegisterUser () {
+        User user = new User();
+        user.setUsername("newUser ");
+        user.setEmail("new@example.com");
+
+        userService.registerUser (user);
+        verify(userDao, times(1)).addUser (user);
+    }
+
+    @Test
+    public void testGetAllUsers() {
+        userService.getAllUsers();
+        verify(userDao, times(1)).getAllUsers();
+    }
+
+    @Test
+    public void testFindUser ByUsername() {
+        String username = "existingUser ";
+        userService.findUser ByUsername(username);
+        verify(userDao, times(1)).getUser ByUsername(username);
+    }
+}

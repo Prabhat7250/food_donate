@@ -1,0 +1,26 @@
+package com.example.service;
+
+import com.example.dao.UserDao;
+import com.example.model.User;
+
+import java.util.List;
+
+public class UserService {
+    private UserDao userDao;
+
+    public UserService(UserDao userDao) {
+        this.userDao = userDao;
+    }
+
+    public void registerUser (User user) {
+        userDao.addUser (user);
+    }
+
+    public List<User> getAllUsers() {
+        return userDao.getAllUsers();
+    }
+
+    public User findUser ByUsername(String username) {
+        return userDao.getUser ByUsername(username);
+    }
+}
